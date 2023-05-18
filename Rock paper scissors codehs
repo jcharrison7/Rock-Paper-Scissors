@@ -1,0 +1,101 @@
+import random
+
+comparison = True
+user_points = 0
+computer_points = 0
+computer_item = 0
+
+def computer_choice():
+    global computer_item
+    #List is on line under this one
+    computer_list = ["rock", "paper", "scissors"]
+    #On line 13 one of the three list items is chosen
+    computer_item = random.choice(computer_list)
+    #on line 15 the value chosen from the list is returned
+    return computer_item
+
+#procedure (name of procedure is "game") with one parameter
+def game(user_selection):
+    if user_selection != "rock" and user_selection != "Rock" and user_selection != "scissors" and user_selection != "Scissors" and user_selection != "paper" and user_selection != "Paper":
+        print("That is not a valid option.")
+        print("----------------------------------------")
+    else:
+        print("The computer chose" , computer_choice())
+        if user_item == "rock" or user_item == "Rock":
+            if computer_item == "paper" or computer_item == "Paper":
+                paper_wins()
+                comparison = False
+                scoreboard(comparison)
+            elif computer_item == "rock" or computer_item == "Rock":
+                tie()
+                comparison = ""
+                scoreboard(comparison)
+            else:
+                rock_wins()
+                comparison = True
+                scoreboard(comparison)
+        if user_item == "scissors" or user_item == "Scissors":
+            if computer_item == "paper" or computer_item == "Paper":
+                scissors_wins()
+                comparison = True
+                scoreboard(comparison)
+            elif computer_item == "rock" or computer_item == "Rock":
+                rock_wins()
+                comparison = False
+                scoreboard(comparison)
+            else:
+                tie()
+                comparison = ""
+                scoreboard(comparison)
+        if user_item == "paper" or user_item == "Paper":
+            if computer_item == "paper" or computer_item == "Paper":
+                tie()
+                comparison = ""
+                scoreboard(comparison)
+            elif computer_item == "rock" or computer_item == "Rock":
+                paper_wins()
+                comparison = True
+                scoreboard(comparison)
+            else:
+                scissors_wins()
+                comparison = False
+                scoreboard(comparison)
+            
+            
+
+def paper_wins():
+    print("Paper covers rock!")
+
+def rock_wins():
+    print("Rock crushes scissors!")
+
+def scissors_wins():
+    print("Scissors cuts paper!")
+    
+def tie():
+    print("It's a tie!")
+    
+def scoreboard(winner):
+    if winner == True:
+        global user_points
+        user_points += 1
+    elif winner == False:
+        global computer_points
+        computer_points += 1
+    else:
+        computer_points += 0
+    print("Score is player " + str(user_points) + " to computer " + str(computer_points))
+    print("--------------------------------")
+    
+    
+while True:
+    #User input here:
+    user_item = str(input("Choose rock, paper, or scissors: "))
+    #Final call of procedure:
+    game(user_item)
+    if user_points == 2:
+        print("Congratulations, you win!")
+        break
+    if computer_points == 2:
+        print("Try again! Computer won")
+        break
